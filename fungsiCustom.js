@@ -19,10 +19,10 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-let splittedArr = [];
-
 function bacaData(fnCallback) {
   let fileList = [file1, file2, file3];
+  let splittedArr = [];
+
   for (const element of fileList) {
     fs.readFile(element, 'utf-8', (err, data) => {
       if (err) {
@@ -45,6 +45,7 @@ function bacaData(fnCallback) {
           let splittedData = parsedData[0]['data'].message.split(' ');
           const lastWord = splittedData[1];
           fnCallback(err, lastWord);
+          return console.log(splittedArr);
         }
 
         function fnCallback(err, secondWord) {
@@ -52,7 +53,6 @@ function bacaData(fnCallback) {
             return console.log(`Error : ` + err);
           } else {
             splittedArr.push(secondWord);
-            console.log(splittedArr);
           }
         }
       }
