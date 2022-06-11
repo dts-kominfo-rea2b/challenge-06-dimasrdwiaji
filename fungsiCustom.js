@@ -23,7 +23,7 @@ function bacaData(fnCallback) {
   let fileList = [file1, file2, file3];
   let splittedArr = [];
 
-  for (const element of fileList) {
+  let finalArr = fileList.map((element) => {
     fs.readFile(element, 'utf-8', (err, data) => {
       if (err) {
         return console.log(`Error : ` + err);
@@ -42,12 +42,13 @@ function bacaData(fnCallback) {
         } else if (parsedData[0]['data'].message !== undefined) {
           let splittedData = parsedData[0]['data'].message.split(' ')[1];
           splittedArr.push(splittedData);
-          console.log(splittedArr);
+          //console.log(splittedArr);
         }
       }
-    })
-  }
-  fnCallback(null, splittedArr);
+    });
+    return finalArr
+  })
+  fnCallback(null, finalArr);
 }
 
 
