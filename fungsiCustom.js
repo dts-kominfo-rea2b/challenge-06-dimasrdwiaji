@@ -30,34 +30,24 @@ function bacaData(fnCallback) {
       } else {
         const parsedData = JSON.parse(data);
         if (parsedData.message !== undefined) {
-          let splittedData = parsedData.message.split(' ');
-          const lastWord = splittedData[1];
-          fnCallback(err, lastWord);
+          let splittedData = parsedData.message.split(' ')[1];
+          splittedArr.push(splittedData);
       
         // Condition for JSON file like data2.json
         } else if (parsedData[0].message !== undefined) {
-          let splittedData = parsedData[0].message.split(' ');
-          const lastWord = splittedData[1];
-          fnCallback(err, lastWord);
+          let splittedData = parsedData[0].message.split(' ')[1];
+          splittedArr.push(splittedData);
       
         // Condition for JSON file like data3.json
         } else if (parsedData[0]['data'].message !== undefined) {
-          let splittedData = parsedData[0]['data'].message.split(' ');
-          const lastWord = splittedData[1];
-          fnCallback(err, lastWord);
-          return console.log(splittedArr);
-        }
-
-        function fnCallback(err, secondWord) {
-          if (err) {
-            return console.log(`Error : ` + err);
-          } else {
-            splittedArr.push(secondWord);
-          }
+          let splittedData = parsedData[0]['data'].message.split(' ')[1];
+          splittedArr.push(splittedData);
+          console.log(splittedArr);
         }
       }
     })
   }
+  fnCallback(null, splittedArr);
 }
 
 
