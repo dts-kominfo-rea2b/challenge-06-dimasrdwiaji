@@ -47,7 +47,7 @@ const bacaData = (fnCallback) => {
         let parsedData = JSON.parse(data);
         splittedArr.push(parsedData[0]['data'].message.split(' ')[1]);
 
-        // Cek hasil
+        // Cek hasil (seharusnya splittedArr udah keisi hasil data splitting)
         console.log(splittedArr);
 
         // Callback hasil akhir
