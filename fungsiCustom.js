@@ -19,38 +19,28 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-function bacaData(fnCallback) {
-  let fileList = [file1, file2, file3];
-  let splittedArr = [];
+const bacaData = (fnCallback) => {
+  const splittedArr = [];
 
-  let finalArr = fileList.map((element) => {
-    fs.readFile(element, 'utf-8', (err, data) => {
-      if (err) {
-        return console.log(`Error : ` + err);
-      } else {
-        const parsedData = JSON.parse(data);
-        if (parsedData.message !== undefined) {
-          let splittedData = parsedData.message.split(' ')[1];
-          splittedArr.push(splittedData);
-      
-        // Condition for JSON file like data2.json
-        } else if (parsedData[0].message !== undefined) {
-          let splittedData = parsedData[0].message.split(' ')[1];
-          splittedArr.push(splittedData);
-      
-        // Condition for JSON file like data3.json
-        } else if (parsedData[0]['data'].message !== undefined) {
-          let splittedData = parsedData[0]['data'].message.split(' ')[1];
-          splittedArr.push(splittedData);
-          //console.log(splittedArr);
-        }
-      }
-    });
-    return finalArr
+  fs.readFile(file1, 'utf-8', (err, data) => {
+    let parsedData = JSON.parse(data);
+    splittedArr.push(parsedData.message.split(' ')[1]);
+
+    fs.readFile(file2, 'utf-8', (err, data) => {
+      let parsedData = JSON.parse(data);
+      splittedArr.push(parsedData[0].message.split(' ')[1]);
+
+      fs.readFile(file3, 'utf-8', (err, data) => {
+        let parsedData = JSON.parse(data);
+        splittedArr.push(parsedData[0]['data'].message.split(' ')[1]);
+
+        console.log(splittedArr);
+        
+        fnCallback(err, splittedArr)
+      })
+    })
   })
-  fnCallback(null, finalArr);
 }
-
 
 // ! JANGAN DIMODIFIKASI
 module.exports = {
