@@ -20,22 +20,37 @@ let modifyFile3 = (val) => {
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
 const bacaData = (fnCallback) => {
+  // Siapkan array wadah hasil data parsing dan data splitting
   const splittedArr = [];
 
+  // Baca file 1
   fs.readFile(file1, 'utf-8', (err, data) => {
+    if (err) {
+      console.log(`Error :` + err);
+    }
     let parsedData = JSON.parse(data);
     splittedArr.push(parsedData.message.split(' ')[1]);
 
+    // Baca file 2
     fs.readFile(file2, 'utf-8', (err, data) => {
+      if (err) {
+        console.log(`Error :` + err);
+      }
       let parsedData = JSON.parse(data);
       splittedArr.push(parsedData[0].message.split(' ')[1]);
 
+      // Baca file 3
       fs.readFile(file3, 'utf-8', (err, data) => {
+        if (err) {
+          console.log(`Error :` + err);
+        }
         let parsedData = JSON.parse(data);
         splittedArr.push(parsedData[0]['data'].message.split(' ')[1]);
 
+        // Cek hasil
         console.log(splittedArr);
-        
+
+        // Callback hasil akhir
         fnCallback(err, splittedArr)
       })
     })
